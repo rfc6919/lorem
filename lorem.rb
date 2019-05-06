@@ -51,7 +51,7 @@ class String
 end
 
 get '/' do
-    domain = request.host.split('.').first
+    domain = request.host.split('.')[1]
     halt 400 unless domain.downcase == DOMAIN
     id = domain.get_case
 
@@ -88,7 +88,7 @@ post '/' do
         halt 500
     end
 
-    url = "http://#{DOMAIN.dup.set_case(id)}.com"
+    url = "http://www.#{DOMAIN.dup.set_case(id)}.com"
     content_type :json
     { :url => url }.to_json
 end
